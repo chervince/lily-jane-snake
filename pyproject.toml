@@ -1,0 +1,19 @@
+[project]
+name = "lily-jane-snake"
+version = "1.0.0"
+description = "A gentle, no-fail Snake game for a 5-year-old"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+# The pure game core and config live at the repo root; put them on the path
+# so `import snake_core` / `import config` work from tests/.
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.mypy]
+# Type-check only the pygame-free code. The Pygame shell (main.py, sound_fx.py,
+# icon.py) is intentionally excluded: pygame ships no type stubs and, per the
+# spec, the shell is verified by playing rather than by static checks.
+python_version = "3.10"
+strict = true
+files = ["snake_core.py", "config.py", "tests"]
