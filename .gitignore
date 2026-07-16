@@ -1,0 +1,11 @@
+# Local virtualenv used for tests/typechecking
+.venv/
+
+# Python bytecode & tool caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Generated at install time on the target machine
+icon.png
