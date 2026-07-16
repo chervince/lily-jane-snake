@@ -26,6 +26,11 @@ DOWN: Direction = (0, 1)
 LEFT: Direction = (-1, 0)
 RIGHT: Direction = (1, 0)
 
+# The default play field: few, big cells so everything is easy for a young
+# child to see. The core owns this so rules and rendering share one source.
+GRID_W = 15
+GRID_H = 12
+
 # How a new fruit's cell is chosen from the cells that are currently free.
 # Injecting this -- rather than calling a global random function -- is what
 # makes fruit placement deterministic under test.
@@ -76,8 +81,8 @@ class GameState:
 
 
 def new_game(
-    width: int = 15,
-    height: int = 12,
+    width: int = GRID_W,
+    height: int = GRID_H,
     *,
     death_enabled: bool = False,
     pick: Pick | None = None,

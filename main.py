@@ -43,9 +43,8 @@ def _make_screen() -> pygame.Surface:
 
 
 def _fresh_game() -> snake_core.GameState:
-    return snake_core.new_game(
-        graphics.GRID_W, graphics.GRID_H, death_enabled=config.mort_activee
-    )
+    # Board size comes from the core's defaults (its single source of truth).
+    return snake_core.new_game(death_enabled=config.mort_activee)
 
 
 def run() -> None:
@@ -77,20 +76,17 @@ def run() -> None:
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
-                elif scene == WELCOME and event.key in ARROW_KEYS:
-                    state = _fresh_game()
-                    since_tick = 0.0
-                    scene = PLAYING
-                elif scene == PLAYING and event.key in ARROW_KEYS:
-                    state = snake_core.step(
-                        state, snake_core.Turn(ARROW_TO_DIRECTION[event.key])
-                    )
-                elif scene == GAME_OVER and (
-                    event.key in ARROW_KEYS or event.key == pygame.K_SPACE
-                ):
-                    state = _fresh_game()
-                    since_tick = 0.0
-                    scene = PLAYING
+                elif event.key in ARROW_KEYS:
+                    if scene == PLAYING:
+                        state = snake_core.step(
+                            state, snake_core.Turn(ARROW_TO_DIRECTION[event.key])
+                        )
+                    else:
+                        # On the welcome or game-over screen, any arrow starts a
+                        # fresh game -- the only keys she ever needs.
+                        state = _fresh_game()
+                        since_tick = 0.0
+                        scene = PLAYING
 
         if scene == PLAYING:
             since_tick += dt

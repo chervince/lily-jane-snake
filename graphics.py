@@ -16,9 +16,9 @@ from dataclasses import dataclass
 
 import pygame
 
-# The board: few, big cells so everything is easy for a 5-year-old to see.
-GRID_W = 15
-GRID_H = 12
+# Board size lives in the core (the single source of truth shared by the rules
+# and this rendering layer).
+from snake_core import GRID_H, GRID_W
 
 # A bright, friendly palette.
 BG = (150, 210, 245)          # sky blue
@@ -107,6 +107,14 @@ def draw_face(surface: pygame.Surface, cx: float, cy: float, size: float) -> Non
                       [(int(x), int(y)) for x, y in smile], max(2, int(size * 0.06)))
 
 
+def _draw_head(surface: pygame.Surface, cx: float, cy: float, size: float) -> None:
+    """A rounded snake head with a smiling face, centred on (cx, cy)."""
+    rect = pygame.Rect(0, 0, int(size), int(size))
+    rect.center = (int(cx), int(cy))
+    pygame.draw.rect(surface, SNAKE_HEAD, rect, border_radius=int(size * 0.40))
+    draw_face(surface, rect.centerx, rect.centery, size)
+
+
 def draw_snake(surface: pygame.Surface, snake: tuple, cell: int, ox: int, oy: int) -> None:
     """Body segments first, then the smiling head on top."""
     radius = int(cell * 0.36)
@@ -116,9 +124,7 @@ def draw_snake(surface: pygame.Surface, snake: tuple, cell: int, ox: int, oy: in
         pygame.draw.rect(surface, SNAKE_BODY_EDGE, rect, width=max(1, int(cell * 0.03)),
                          border_radius=radius)
     hx, hy = snake[0]
-    hrect = _cell_rect(hx, hy, cell, ox, oy, inset=0.04)
-    pygame.draw.rect(surface, SNAKE_HEAD, hrect, border_radius=int(cell * 0.40))
-    draw_face(surface, hrect.centerx, hrect.centery, cell)
+    _draw_head(surface, ox + (hx + 0.5) * cell, oy + (hy + 0.5) * cell, cell * 0.92)
 
 
 def draw_apple(surface: pygame.Surface, cx: float, cy: float, size: float) -> None:
@@ -161,10 +167,7 @@ def _draw_welcome_snake(surface: pygame.Surface, w: int, h: int) -> None:
         pygame.draw.circle(surface, SNAKE_BODY, (x, y), seg // 2)
         pygame.draw.circle(surface, SNAKE_BODY_EDGE, (x, y), seg // 2, max(1, seg // 16))
     hx, hy = pts[-1]
-    hrect = pygame.Rect(0, 0, seg, seg)
-    hrect.center = (hx, hy)
-    pygame.draw.rect(surface, SNAKE_HEAD, hrect, border_radius=int(seg * 0.40))
-    draw_face(surface, hx, hy, seg)
+    _draw_head(surface, hx, hy, seg)
 
 
 def draw_welcome(surface: pygame.Surface, fonts: Fonts, t_ms: int) -> None:
