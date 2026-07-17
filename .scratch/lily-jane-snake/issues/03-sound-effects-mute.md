@@ -6,8 +6,8 @@
 
 **Status:** ready-for-agent
 
-- [ ] Two sound effects (a fruit-eaten munch/ding and a start sound) are synthesised with the Python standard library (`wave` + `math`), so there are no extra runtime dependencies and no external audio files/licensing.
-- [ ] The munch plays when a fruit is eaten; the start sound plays when the game launches.
-- [ ] `config.py` gains a `son_active` knob (default `True`); when set `False`, no sounds play.
-- [ ] There is no background music.
-- [ ] The sound layer lives in the shell only — the pure game core stays free of audio.
+- [x] Two sound effects (a fruit-eaten munch/ding and a start sound) are synthesised with the Python standard library (`wave` + `math`), so there are no extra runtime dependencies and no external audio files/licensing.
+- [x] The munch plays when a fruit is eaten; the start sound plays when the game launches.
+- [x] `config.py` gains a `son_active` knob (default `True`); when set `False`, no sounds play.
+- [x] There is no background music.
+- [x] The sound layer lives in the shell only — the pure game core stays free of audio.

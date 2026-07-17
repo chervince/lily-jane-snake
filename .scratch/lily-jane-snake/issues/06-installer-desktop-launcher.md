@@ -6,8 +6,8 @@
 
 **Status:** ready-for-agent
 
-- [ ] `install.sh` copies the game into a folder under the user's home (e.g. `~/Jeux/…`).
-- [ ] The installer ensures Pygame is available on the target machine (via `apt` `python3-pygame` or `pip`), so the game runs even if Edubuntu didn't have it.
-- [ ] The installer places a `.desktop` launcher with a code-supplied icon on the desktop and in the Applications menu, named "Lily Jane's Snake".
-- [ ] Double-clicking the icon launches the game in the mode she plays (full-screen welcome flow).
-- [ ] The parent runs the installer once from the terminal; no further terminal use is needed to play.
+- [x] `install.sh` copies the game into a folder under the user's home (e.g. `~/Jeux/…`).
+- [x] The installer ensures Pygame is available on the target machine (via `apt` `python3-pygame` or `pip`), so the game runs even if Edubuntu didn't have it.
+- [x] The installer places a `.desktop` launcher with a code-supplied icon on the desktop and in the Applications menu, named "Lily Jane's Snake".
+- [x] Double-clicking the icon launches the game in the mode she plays (full-screen welcome flow).
+- [x] The parent runs the installer once from the terminal; no further terminal use is needed to play.

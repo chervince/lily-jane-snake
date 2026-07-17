@@ -6,8 +6,8 @@
 
 **Status:** ready-for-agent
 
-- [ ] A welcome screen shows: the title "Lily Jane's Snake", a smiling snake, the name "Lily Jane", and "Press an arrow to play". All on-screen text is English.
-- [ ] Pressing any arrow key on the welcome screen starts play.
-- [ ] `config.py` gains a `plein_ecran` knob (default `True`); when `True` the game runs full-screen, when `False` it runs in a window (for development).
-- [ ] In full-screen the grid (~15×12 large cells) scales to fill the screen; no fixed resolution is baked in — it adapts to the display.
-- [ ] The window/title caption and the on-screen title read "Lily Jane's Snake".
+- [x] A welcome screen shows: the title "Lily Jane's Snake", a smiling snake, the name "Lily Jane", and "Press an arrow to play". All on-screen text is English.
+- [x] Pressing any arrow key on the welcome screen starts play.
+- [x] `config.py` gains a `plein_ecran` knob (default `True`); when `True` the game runs full-screen, when `False` it runs in a window (for development).
+- [x] In full-screen the grid (~15×12 large cells) scales to fill the screen; no fixed resolution is baked in — it adapts to the display.
+- [x] The window/title caption and the on-screen title read "Lily Jane's Snake".
