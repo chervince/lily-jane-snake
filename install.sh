@@ -15,15 +15,26 @@ APP_NAME="Lily Jane's Snake"
 SLUG="lily-jane-snake"
 SRC_DIR="$(cd "$(dirname "$0")" && pwd)"
 INSTALL_DIR="$HOME/Jeux/$SLUG"
-GAME_FILES=(main.py snake_core.py graphics.py sound_fx.py config.py icon.py)
+CODE_FILES=(main.py snake_core.py graphics.py sound_fx.py icon.py)
 
 echo "Installing ${APP_NAME}..."
 
-# 1. Copy the game into the user's home.
+# 1. Copy the game code into the user's home. These are always refreshed, so
+#    re-running this script is how you update the game.
 mkdir -p "$INSTALL_DIR"
-for f in "${GAME_FILES[@]}"; do
+for f in "${CODE_FILES[@]}"; do
     cp "$SRC_DIR/$f" "$INSTALL_DIR/"
 done
+
+# config.py holds the parent's per-child tuning (speed, mute, death mode). Copy
+# it only on a first install; on an update, keep the existing one so those
+# settings are never overwritten. To restore the defaults, delete
+# "$INSTALL_DIR/config.py" before re-running.
+if [ -f "$INSTALL_DIR/config.py" ]; then
+    echo "Keeping your existing config.py (your settings are preserved)."
+else
+    cp "$SRC_DIR/config.py" "$INSTALL_DIR/"
+fi
 
 # 2. Make sure Pygame is available (apt first on Edubuntu, then pip).
 if ! python3 -c "import pygame" 2>/dev/null; then
